@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="navbar">
     <img src="../assets/images/logo.svg" alt="logo" />
     <button>
         <img src="../assets/images/login.svg" alt="login" />
@@ -11,3 +11,10 @@
 <script setup lang="ts">
 
 </script>
+
+<style scoped>
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

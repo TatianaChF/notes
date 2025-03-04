@@ -1,5 +1,8 @@
 :root {
   background-color: #242424;
+  margin-left: 120px;
+  margin-right: 120px;
+  margin-top: 20px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
