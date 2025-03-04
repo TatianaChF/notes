@@ -1,9 +1,9 @@
 <template>
 <main>
-  <div>
-    <div>
+  <div class="main-content">
+    <div class="main-text">
       <h1>Мои заметки</h1>
-      <p>Не забывай о важном, храни его в облаке.</p>
+      <h3>Не забывай о важном, храни его в облаке.</h3>
     </div>
     <img src="../assets/images/main_image.svg" alt="logo" />
   </div>
@@ -11,3 +11,27 @@
 </template>
 
 <script setup lang="ts"></script>
+
+<style scoped>
+.main-content {
+  display: flex;
+  align-items: center;
+}
+
+.main-text {
+
+}
+
+.main-text h1 {
+  color: #ffffff;
+  font-size: 104px;
+  font-weight: bold;
+}
+
+.main-text h3 {
+  color: #9DA5AF;
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: bold;
+}
+</style>
