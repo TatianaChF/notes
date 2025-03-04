@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import NavbarComponent from './components/NavbarComponent.vue';
+import HeaderComponent from './components/HeaderComponent.vue';
+import MainPage from "./pages/MainPage.vue";
 </script>
 
 <template>
-  <navbar-component />
+  <header-component />
+  <main-page />
 </template>
 
 <style scoped>

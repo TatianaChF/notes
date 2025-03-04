@@ -1,11 +1,11 @@
 <template>
-  <nav class="navbar">
+  <header class="header">
     <img src="../assets/images/logo.svg" alt="logo" />
     <button class="login-btn">
         <img src="../assets/images/login.svg" alt="login" />
         Вход
     </button>
-  </nav>
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -13,7 +13,7 @@
 </script>
 
 <style scoped>
-.navbar {
+.header {
   display: flex;
   justify-content: space-between;
 }
