@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import HeaderComponent from './components/HeaderComponent.vue';
-import MainPage from "./pages/MainPage.vue";
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
   <header-component />
-  <main-page />
+  <router-view />
 </template>
 
 <style scoped>
