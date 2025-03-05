@@ -1,5 +1,8 @@
 <template>
   <div class="container-reg">
+    <button class="btn-close">
+      <img src="../assets/images/close.svg" />
+    </button>
     <div class="container">
       <h2>Регистрация</h2>
       <div class="input-container">
@@ -48,12 +51,24 @@
 </script>
 
 <style scoped>
+.btn-close {
+  border-radius: 32px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: -650px;
+  margin-top: -50px;
+}
+
 .container-reg {
   width: 780px;
   height: 740px;
   background-color: #1B2F46;
   border-radius: 40px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
