@@ -1,9 +1,25 @@
+<script setup lang="ts">
+import {reactive} from "vue";
+
+interface FormData {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
+const formData = reactive<FormData>({
+  email: "",
+  password: "",
+  confirmPassword: ""
+})
+</script>
+
 <template>
   <div class="container-reg">
     <button class="btn-close">
       <img src="../assets/images/close.svg" />
     </button>
-    <div class="container">
+    <form class="container">
       <h2>Регистрация</h2>
       <div class="input-container">
         <div class="input-field">
@@ -11,6 +27,7 @@
             Email
           </label>
           <input
+              v-model="formData.email"
               name="email"
               type="email"
               placeholder="Введите Email" />
@@ -20,6 +37,7 @@
             Пароль
           </label>
           <input
+              v-model="formData.password"
               name="password"
               type="password"
               placeholder="Введите пароль"
@@ -30,6 +48,7 @@
             Пароль еще раз
           </label>
           <input
+              v-model="formData.confirmPassword"
               name="passTwo"
               type="password"
               placeholder="Повторите пароль"
@@ -43,12 +62,9 @@
         </div>
         <button>Зарегистрироваться</button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>
 
 <style scoped>
 .btn-close {
