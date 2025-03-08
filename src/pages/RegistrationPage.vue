@@ -39,6 +39,7 @@
               type="password"
               placeholder="Повторите пароль"
           />
+          <span v-show="errors.confirmPassword">{{errors.confirmPassword}}</span>
         </div>
       </div>
       <div class="link-container">
@@ -91,6 +92,14 @@ const validatePassword = () => {
   } else if (formData.password.length < 3) {
     errors.password = "Пароль должен содержать минимум 3 символа";
   } else delete errors.password;
+};
+
+const validateConfirmPassword = () => {
+  if (!formData.confirmPassword) {
+    errors.confirmPassword = "Подтверждение пароля обязательно";
+  } else if (formData.password != formData.confirmPassword) {
+    errors.confirmPassword = "Пароли не совпадают";
+  } else delete errors.confirmPassword;
 };
 </script>
 
