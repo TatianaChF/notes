@@ -27,6 +27,7 @@
               type="password"
               placeholder="Введите пароль"
           />
+          <span v-show="errors.password">{{errors.password}}</span>
         </div>
         <div class="input-field">
           <label for="passTwo">
@@ -82,7 +83,15 @@ const validateEmail = () => {
   } else if (!emailRegex.test(formData.email)) {
     errors.email = "Некорректный email";
   } else delete errors.email;
-}
+};
+
+const validatePassword = () => {
+  if (!formData.password) {
+    errors.password = "Пароль обязателен";
+  } else if (formData.password.length < 3) {
+    errors.password = "Пароль должен содержать минимум 3 символа";
+  } else delete errors.password;
+};
 </script>
 
 <style scoped>
