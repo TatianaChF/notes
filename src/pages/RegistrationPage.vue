@@ -15,6 +15,7 @@
               name="email"
               type="email"
               placeholder="Введите Email" />
+          <span v-show="errors.email">{{errors.email}}</span>
         </div>
         <div class="input-field">
           <label for="password">
