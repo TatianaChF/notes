@@ -3,7 +3,7 @@
     <button class="btn-close">
       <img src="../assets/images/close.svg" />
     </button>
-    <form class="container">
+    <form @submit.prevent="handleSubmit" class="container">
       <h2>Регистрация</h2>
       <div class="input-container">
         <div class="input-field">
@@ -47,14 +47,14 @@
           <p>У вас есть аккаунт?</p>
           <a href="#">Войдите</a>
         </div>
-        <button>Зарегистрироваться</button>
+        <button type="submit" :disabled="!isFormValid">Зарегистрироваться</button>
       </div>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import {reactive} from "vue";
+import {computed, reactive} from "vue";
 
 interface FormData {
   email?: string;
@@ -100,6 +100,28 @@ const validateConfirmPassword = () => {
   } else if (formData.password != formData.confirmPassword) {
     errors.confirmPassword = "Пароли не совпадают";
   } else delete errors.confirmPassword;
+};
+
+const isFormValid = computed(() => {
+  return Object.keys(errors).length === 0 &&
+      formData.email &&
+      formData.password &&
+      formData.confirmPassword;
+});
+
+const handleSubmit = () => {
+  validateEmail();
+  validatePassword();
+  validateConfirmPassword();
+
+  if (isFormValid.value) {
+    console.log(formData);
+    Object.assign(formData, {
+      email: "",
+      password: "",
+      confirmPassword: ""
+    });
+  }
 };
 </script>
 
