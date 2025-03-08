@@ -1,19 +1,3 @@
-<script setup lang="ts">
-import {reactive} from "vue";
-
-interface FormData {
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-}
-
-const formData = reactive<FormData>({
-  email: "",
-  password: "",
-  confirmPassword: ""
-})
-</script>
-
 <template>
   <div class="container-reg">
     <button class="btn-close">
@@ -65,6 +49,40 @@ const formData = reactive<FormData>({
     </form>
   </div>
 </template>
+
+<script setup lang="ts">
+import {reactive} from "vue";
+
+interface FormData {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
+const formData = reactive<FormData>({
+  email: "",
+  password: "",
+  confirmPassword: ""
+})
+
+const errors = reactive<FormErrors>({});
+
+const validateEmail = () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!formData.email) {
+    errors.email = "Email обязателен";
+  } else if (!emailRegex.test(formData.email)) {
+    errors.email = "Некорректный email";
+  } else delete errors.email;
+}
+</script>
 
 <style scoped>
 .btn-close {
