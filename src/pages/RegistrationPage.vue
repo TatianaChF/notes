@@ -47,7 +47,12 @@
           <p>У вас есть аккаунт?</p>
           <a href="#">Войдите</a>
         </div>
-        <button type="submit" :disabled="!isFormValid">Зарегистрироваться</button>
+        <button
+            type="submit"
+            :class="isDisabled"
+            :disabled="!isFormValid">
+          Зарегистрироваться
+        </button>
       </div>
     </form>
   </div>
@@ -108,6 +113,13 @@ const isFormValid = computed(() => {
       formData.email &&
       formData.password &&
       formData.confirmPassword;
+});
+
+const isDisabled = computed(() => {
+  return (formData.email === ""
+      || formData.password === ""
+      || formData.confirmPassword === "")
+      &&  "btn-disabled";
 });
 
 const handleSubmit = () => {
@@ -188,14 +200,23 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+.btn-disabled {
   padding: 10px 24px;
-  background-color: #B1C909;
   border-radius: 32px;
   border: none;
   font-size: 20px;
   color: #fff;
   cursor: pointer;
+}
+
+button {
+  background-color: #B1C909;
+}
+
+.btn-disabled {
+  background-color: #9DA5AF;
+  cursor: auto;
 }
 
 .link-container {
