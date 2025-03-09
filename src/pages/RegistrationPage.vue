@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, reactive} from "vue";
+import {computed, reactive, ref} from "vue";
 
 interface FormData {
   email?: string;
@@ -93,6 +93,7 @@ const formData = reactive<FormData>({
 })
 
 const errors = reactive<FormErrors>({});
+const isValid = ref(false);
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -133,10 +134,7 @@ const isFormValid = computed(() => {
 });
 
 const isDisabled = computed(() => {
-  return (formData.email === ""
-      || formData.password === ""
-      || formData.confirmPassword === "")
-      &&  "btn-disabled";
+  return !isFormValid.value &&  "btn-disabled";
 });
 
 const resetForm = () => {
