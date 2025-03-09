@@ -14,8 +14,13 @@
               v-model="formData.email"
               name="email"
               type="email"
-              placeholder="Введите Email" />
-          <span v-show="errors.email" class="error">{{errors.email}}</span>
+              placeholder="Введите Email"
+              @blur="validateEmail"/>
+          <span
+              v-show="errors.email"
+              class="error">
+            {{errors.email}}
+          </span>
         </div>
         <div class="input-field">
           <label for="password">
@@ -26,8 +31,12 @@
               name="password"
               type="password"
               placeholder="Введите пароль"
-          />
-          <span v-show="errors.password" class="error">{{errors.password}}</span>
+              @blur="validatePassword"/>
+          <span
+              v-show="errors.password"
+              class="error">
+            {{errors.password}}
+          </span>
         </div>
         <div class="input-field">
           <label for="passTwo">
@@ -38,8 +47,12 @@
               name="passTwo"
               type="password"
               placeholder="Повторите пароль"
-          />
-          <span v-show="errors.confirmPassword" class="error">{{errors.confirmPassword}}</span>
+              @blur="validateConfirmPassword"/>
+          <span
+              v-show="errors.confirmPassword"
+              class="error">
+            {{errors.confirmPassword}}
+          </span>
         </div>
       </div>
       <div class="link-container">
