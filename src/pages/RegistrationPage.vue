@@ -15,7 +15,7 @@
               name="email"
               type="email"
               placeholder="Введите Email" />
-          <span v-show="errors.email">{{errors.email}}</span>
+          <span v-show="errors.email" class="error">{{errors.email}}</span>
         </div>
         <div class="input-field">
           <label for="password">
@@ -27,7 +27,7 @@
               type="password"
               placeholder="Введите пароль"
           />
-          <span v-show="errors.password">{{errors.password}}</span>
+          <span v-show="errors.password" class="error">{{errors.password}}</span>
         </div>
         <div class="input-field">
           <label for="passTwo">
@@ -39,7 +39,7 @@
               type="password"
               placeholder="Повторите пароль"
           />
-          <span v-show="errors.confirmPassword">{{errors.confirmPassword}}</span>
+          <span v-show="errors.confirmPassword" class="error">{{errors.confirmPassword}}</span>
         </div>
       </div>
       <div class="link-container">
@@ -63,7 +63,6 @@ interface FormData {
 }
 
 interface FormErrors {
-  name?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
@@ -79,11 +78,13 @@ const errors = reactive<FormErrors>({});
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  console.log(formData.email);
   if (!formData.email) {
     errors.email = "Email обязателен";
   } else if (!emailRegex.test(formData.email)) {
     errors.email = "Некорректный email";
-  } else delete errors.email;
+  } else errors.email = undefined;
+  console.log(errors);
 };
 
 const validatePassword = () => {
@@ -91,7 +92,7 @@ const validatePassword = () => {
     errors.password = "Пароль обязателен";
   } else if (formData.password.length < 3) {
     errors.password = "Пароль должен содержать минимум 3 символа";
-  } else delete errors.password;
+  } else errors.password = undefined;
 };
 
 const validateConfirmPassword = () => {
@@ -99,7 +100,7 @@ const validateConfirmPassword = () => {
     errors.confirmPassword = "Подтверждение пароля обязательно";
   } else if (formData.password != formData.confirmPassword) {
     errors.confirmPassword = "Пароли не совпадают";
-  } else delete errors.confirmPassword;
+  } else errors.confirmPassword = undefined;
 };
 
 const isFormValid = computed(() => {
@@ -113,6 +114,7 @@ const handleSubmit = () => {
   validateEmail();
   validatePassword();
   validateConfirmPassword();
+  console.log(formData);
 
   if (isFormValid.value) {
     console.log(formData);
@@ -205,5 +207,10 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.error {
+  color: #FF7461;
+  font-size: 18px;
 }
 </style>
