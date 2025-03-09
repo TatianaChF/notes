@@ -195,6 +195,7 @@ button {
   border: none;
   font-size: 20px;
   color: #fff;
+  cursor: pointer;
 }
 
 .link-container {
