@@ -102,7 +102,6 @@ const validateEmail = () => {
   } else if (!emailRegex.test(formData.email)) {
     errors.email = "Некорректный email";
   } else errors.email = undefined;
-  console.log(errors);
 };
 
 const validatePassword = () => {
@@ -139,10 +138,8 @@ const handleSubmit = () => {
   validateEmail();
   validatePassword();
   validateConfirmPassword();
-  console.log(formData);
 
   if (isFormValid.value) {
-    console.log(formData);
     Object.assign(formData, {
       email: "",
       password: "",
