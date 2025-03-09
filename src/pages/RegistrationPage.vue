@@ -96,7 +96,6 @@ const errors = reactive<FormErrors>({});
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  console.log(formData.email);
   if (!formData.email) {
     errors.email = "Email обязателен";
   } else if (!emailRegex.test(formData.email)) {
@@ -121,10 +120,16 @@ const validateConfirmPassword = () => {
 };
 
 const isFormValid = computed(() => {
-  return Object.keys(errors).length === 0 &&
-      formData.email &&
-      formData.password &&
-      formData.confirmPassword;
+  const isAllFieldsValid =
+      formData.email?.trim() !== "" &&
+      formData.password?.trim() !== "" &&
+      formData.confirmPassword?.trim() !== "";
+
+  const hasNoErrors = Object.values(errors).every(
+      error => error === undefined
+  );
+
+  return isAllFieldsValid && hasNoErrors;
 });
 
 const isDisabled = computed(() => {
@@ -134,17 +139,23 @@ const isDisabled = computed(() => {
       &&  "btn-disabled";
 });
 
-const handleSubmit = () => {
+const resetForm = () => {
   validateEmail();
   validatePassword();
   validateConfirmPassword();
 
+  formData.email = "";
+  formData.password = "";
+  formData.confirmPassword = "";
+
+  Object.keys(errors).forEach(key => {
+    errors[key as keyof FormErrors] = undefined;
+  });
+}
+
+const handleSubmit = () => {
   if (isFormValid.value) {
-    Object.assign(formData, {
-      email: "",
-      password: "",
-      confirmPassword: ""
-    });
+    resetForm();
   }
 };
 </script>
