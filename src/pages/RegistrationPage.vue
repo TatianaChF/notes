@@ -86,6 +86,12 @@ interface FormErrors {
   confirmPassword?: string;
 }
 
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  errors?: Record<string, string>;
+}
+
 const formData = reactive<FormData>({
   email: "",
   password: "",
@@ -93,7 +99,6 @@ const formData = reactive<FormData>({
 })
 
 const errors = reactive<FormErrors>({});
-const isValid = ref(false);
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -134,7 +139,7 @@ const isFormValid = computed(() => {
 });
 
 const isDisabled = computed(() => {
-  return !isFormValid.value &&  "btn-disabled";
+  return !isFormValid.value && "btn-disabled";
 });
 
 const resetForm = () => {
