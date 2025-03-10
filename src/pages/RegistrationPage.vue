@@ -114,8 +114,8 @@ const validateEmail = () => {
 const validatePassword = () => {
   if (!formData.password) {
     errors.password = "Пароль обязателен";
-  } else if (formData.password.length < 3) {
-    errors.password = "Пароль должен содержать минимум 3 символа";
+  } else if (formData.password.length < 4) {
+    errors.password = "Пароль должен содержать минимум 4 символа";
   } else errors.password = undefined;
 };
 
@@ -172,17 +172,17 @@ const handleSubmit = async () => {
       })
     });
     const data: ApiResponse = await response.json();
-    console.log(data);
 
     if (data.id) {
       resetForm();
     } else {
-      console.log(data.message);
+      errors.email = data.message;
     }
   } catch (error) {
     console.log(error);
   }
 };
+
 </script>
 
 <style scoped>
