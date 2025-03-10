@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, reactive, ref} from "vue";
+import {computed, reactive} from "vue";
 
 interface FormData {
   email?: string;
@@ -97,8 +97,10 @@ const formData = reactive<FormData>({
   password: "",
   confirmPassword: ""
 })
-
 const errors = reactive<FormErrors>({});
+const responseErrors = reactive<ApiResponse>({
+  success: false,
+});
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -143,10 +145,6 @@ const isDisabled = computed(() => {
 });
 
 const resetForm = () => {
-  validateEmail();
-  validatePassword();
-  validateConfirmPassword();
-
   formData.email = "";
   formData.password = "";
   formData.confirmPassword = "";
@@ -156,9 +154,33 @@ const resetForm = () => {
   });
 }
 
-const handleSubmit = () => {
-  if (isFormValid.value) {
-    resetForm();
+const handleSubmit = async () => {
+  try {
+    validateEmail();
+    validatePassword();
+    validateConfirmPassword();
+
+    const response = await fetch('https://dist.nd.ru/api/reg', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password,
+        confirm_password: formData.confirmPassword,
+      })
+    });
+    const data: ApiResponse = await response.json();
+
+    if (data.success) {
+      resetForm();
+      console.log("Форма отпарвлена");
+    } else {
+      console.log(data.errors);
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 </script>
