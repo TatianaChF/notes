@@ -87,9 +87,11 @@ interface FormErrors {
 }
 
 interface ApiResponse {
-  success: boolean;
-  message?: string;
-  errors?: Record<string, string>;
+    message?: string;
+    error?: string;
+    statusCode?: number;
+    id?: number;
+    email?: string;
 }
 
 const formData = reactive<FormData>({
@@ -98,9 +100,7 @@ const formData = reactive<FormData>({
   confirmPassword: ""
 })
 const errors = reactive<FormErrors>({});
-const responseErrors = reactive<ApiResponse>({
-  success: false,
-});
+const responseErrors = reactive<ApiResponse>({});
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -172,12 +172,12 @@ const handleSubmit = async () => {
       })
     });
     const data: ApiResponse = await response.json();
+    console.log(data);
 
-    if (data.success) {
+    if (data.id) {
       resetForm();
-      console.log("Форма отпарвлена");
     } else {
-      console.log(data.errors);
+      console.log(data.message);
     }
   } catch (error) {
     console.log(error);
