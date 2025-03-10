@@ -100,7 +100,6 @@ const formData = reactive<FormData>({
   confirmPassword: ""
 })
 const errors = reactive<FormErrors>({});
-const responseErrors = reactive<ApiResponse>({});
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
