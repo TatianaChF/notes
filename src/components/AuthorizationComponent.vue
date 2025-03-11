@@ -5,7 +5,7 @@
         @click="changeShowForm">
       <img src="../assets/images/close.svg" />
     </button>
-    <div class="container">
+    <form @submit.prevent="authorizationStore.handleSubmit" class="container">
       <h2>Вход в ваш аккаунт</h2>
       <div class="input-container">
         <div class="input-field">
@@ -16,7 +16,13 @@
               v-model="authorizationStore.authorizationData.email"
               name="email"
               type="email"
-              placeholder="Введите Email" />
+              placeholder="Введите Email"
+              @blur="authorizationStore.validateEmail" />
+          <span
+              v-show="authorizationStore.errors.email"
+              class="error">
+            {{authorizationStore.errors.email}}
+          </span>
         </div>
         <div class="input-field">
           <label for="password">
@@ -26,7 +32,13 @@
               v-model="authorizationStore.authorizationData.password"
               name="password"
               type="password"
-              placeholder="Введите пароль" />
+              placeholder="Введите пароль"
+              @blur="authorizationStore.validatePassword" />
+          <span
+              v-show="authorizationStore.errors.password"
+              class="error">
+            {{authorizationStore.errors.password}}
+          </span>
         </div>
       </div>
       <div class="link-container">
@@ -38,7 +50,7 @@
           Зарегистрироваться
         </button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
