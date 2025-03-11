@@ -1,19 +1,25 @@
 <template>
-<main>
-  <div class="main-content">
-    <div>
-      <h1>Мои заметки</h1>
-      <h3>Не забывай о важном, храни его в облаке.</h3>
+  <header-component />
+  <main>
+    <div class="main-content">
+      <div>
+        <h1>Мои заметки</h1>
+        <h3>Не забывай о важном, храни его в облаке.</h3>
+      </div>
+      <img
+          src="../assets/images/main_image.svg"
+          alt="main image"
+          class="main-image" />
     </div>
-    <img
-        src="../assets/images/main_image.svg"
-        alt="main image"
-        class="main-image" />
-  </div>
-</main>
+  </main>
+  <RegistrationPage />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import RegistrationPage from "./RegistrationPage.vue";
+import HeaderComponent from "../components/HeaderComponent.vue";
+
+</script>
 
 <style scoped>
 .main-content {
