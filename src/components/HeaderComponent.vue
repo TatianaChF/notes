@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <img src="../assets/images/logo.svg" alt="logo" />
-    <button class="login-btn">
+    <button
+        class="login-btn"
+        @click="changeShowForm">
         <img src="../assets/images/login.svg" alt="login" />
         Вход
     </button>
@@ -9,7 +11,13 @@
 </template>
 
 <script setup lang="ts">
+const emits = defineEmits([
+    "showForm"
+]);
 
+const changeShowForm = () => {
+  emits("showForm")
+}
 </script>
 
 <style scoped>
@@ -29,5 +37,6 @@
   border: none;
   font-size: 20px;
   color: #fff;
+  cursor: pointer;
 }
 </style>
