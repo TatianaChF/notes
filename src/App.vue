@@ -1,11 +1,13 @@
 <template>
-  <header-component @show-form="isOpenForm = true" />
-  <router-view v-slot="{ Component }">
-    <component :is="Component" :class="{'darkened': isOpenForm}" />
-  </router-view>/
-  <registration-page
-      v-show="isOpenForm"
-      @close-form="isOpenForm = false" />
+  <div class="app">
+    <header-component @show-form="isOpenForm = true" />
+    <router-view v-slot="{ Component }">
+      <component :is="Component" :class="{'darkened': isOpenForm}" />
+    </router-view>/
+    <registration-page
+        v-show="isOpenForm"
+        @close-form="isOpenForm = false" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +20,11 @@ const isOpenForm = ref<boolean>(false);
 </script>
 
 <style scoped>
+.app {
+  position: relative;
+  z-index: 1000;
+}
+
 .darkened {
   filter: brightness(0.5);
   transition: filter 0.3s;

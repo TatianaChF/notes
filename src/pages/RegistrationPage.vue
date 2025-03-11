@@ -206,6 +206,9 @@ const handleSubmit = async () => {
 }
 
 .container-reg {
+  position: absolute;
+  top: 10%;
+  left: 20%;
   width: 780px;
   height: 740px;
   background-color: #1B2F46;
