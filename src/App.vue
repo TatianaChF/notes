@@ -1,9 +1,9 @@
 <template>
-  <header-component />
+  <header-component @show-form="isOpenForm = true" />
   <router-view v-slot="{ Component }">
     <component :is="Component" :class="{'darkened': isOpenForm}" />
   </router-view>/
-  <registration-page />
+  <registration-page v-show="isOpenForm" />
 </template>
 
 <script setup lang="ts">
