@@ -18,15 +18,3 @@ import RegistrationPage from "./pages/RegistrationPage.vue";
 
 const isOpenForm = ref<boolean>(false);
 </script>
-
-<style scoped>
-.app {
-  position: relative;
-  z-index: 1000;
-}
-
-.darkened {
-  filter: brightness(0.5);
-  transition: filter 0.3s;
-}
-</style>

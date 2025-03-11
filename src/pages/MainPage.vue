@@ -15,27 +15,3 @@
 
 <script setup lang="ts">
 </script>
-
-<style scoped>
-.main-content {
-  display: flex;
-  align-items: center;
-}
-
-h1 {
-  color: #ffffff;
-  font-size: 104px;
-  font-weight: bold;
-}
-
-h3 {
-  color: #9DA5AF;
-  font-size: 32px;
-  line-height: 48px;
-  font-weight: bold;
-}
-
-.main-image {
-  width: 60%;
-}
-</style>
