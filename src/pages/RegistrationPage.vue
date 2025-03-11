@@ -76,26 +76,6 @@
 <script setup lang="ts">
 import {computed, reactive} from "vue";
 
-interface FormData {
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-}
-
-interface FormErrors {
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-}
-
-interface ApiResponse {
-    message?: string;
-    error?: string;
-    statusCode?: number;
-    id?: number;
-    email?: string;
-}
-
 const formData = reactive<FormData>({
   email: "",
   password: "",
