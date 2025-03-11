@@ -1,5 +1,4 @@
 <template>
-  <header-component />
   <main>
     <div class="main-content">
       <div>
@@ -12,13 +11,9 @@
           class="main-image" />
     </div>
   </main>
-  <RegistrationPage />
 </template>
 
 <script setup lang="ts">
-import RegistrationPage from "./RegistrationPage.vue";
-import HeaderComponent from "../components/HeaderComponent.vue";
-
 </script>
 
 <style scoped>

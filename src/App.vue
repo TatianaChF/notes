@@ -1,7 +1,16 @@
+<template>
+  <header-component />
+  <router-view v-slot="{ Component }">
+    <component :is="Component" :class="{'darkened': isOpenForm}" />
+  </router-view>/
+  <registration-page />
+</template>
+
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-</script>
+import HeaderComponent from "./components/HeaderComponent.vue";
+import {ref} from "vue";
+import RegistrationPage from "./pages/RegistrationPage.vue";
 
-<template>
-  <router-view />
-</template>
+const isOpenForm = ref<boolean>(false);
+</script>
