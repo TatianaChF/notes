@@ -13,6 +13,7 @@
             Email
           </label>
           <input
+              v-model="authorizationStore.authorizationData.email"
               name="email"
               type="email"
               placeholder="Введите Email" />
@@ -22,6 +23,7 @@
             Пароль
           </label>
           <input
+              v-model="authorizationStore.authorizationData.password"
               name="password"
               type="password"
               placeholder="Введите пароль" />
@@ -41,6 +43,9 @@
 </template>
 
 <script lang='ts' setup>
+import {useAuthorizationStore} from "../store/authorization.ts";
+
+const authorizationStore = useAuthorizationStore();
 const emits = defineEmits([
   "closeForm"
 ]);
