@@ -85,7 +85,9 @@ export const useRegistrationStore = defineStore('registrationData', () => {
 
             if (data.id) {
                 resetForm();
+                console.log(data)
             } else {
+                console.log(data)
                 errors.email = data.message;
             }
         } catch (error) {
@@ -93,5 +95,6 @@ export const useRegistrationStore = defineStore('registrationData', () => {
         }
     };
 
-    return {handleSubmit}
+    return {formData, errors, handleSubmit,
+        validateEmail, validatePassword, validateConfirmPassword}
 })

@@ -5,7 +5,7 @@
         @click="changeShowForm">
       <img src="../assets/images/close.svg" />
     </button>
-    <form @submit.prevent="handleSubmit" class="container">
+    <form @submit.prevent="registrationStore.handleSubmit" class="container">
       <h2>Регистрация</h2>
       <div class="input-container">
         <div class="input-field">
@@ -13,15 +13,15 @@
             Email
           </label>
           <input
-              v-model="formData.email"
+              v-model="registrationStore.formData.email"
               name="email"
               type="email"
               placeholder="Введите Email"
-              @blur="validateEmail"/>
+              @blur="registrationStore.validateEmail"/>
           <span
-              v-show="errors.email"
+              v-show="registrationStore.errors.email"
               class="error">
-            {{errors.email}}
+            {{registrationStore.errors.email}}
           </span>
         </div>
         <div class="input-field">
@@ -29,15 +29,15 @@
             Пароль
           </label>
           <input
-              v-model="formData.password"
+              v-model="registrationStore.formData.password"
               name="password"
               type="password"
               placeholder="Введите пароль"
-              @blur="validatePassword"/>
+              @blur="registrationStore.validatePassword"/>
           <span
-              v-show="errors.password"
+              v-show="registrationStore.errors.password"
               class="error">
-            {{errors.password}}
+            {{registrationStore.errors.password}}
           </span>
         </div>
         <div class="input-field">
@@ -45,15 +45,15 @@
             Пароль еще раз
           </label>
           <input
-              v-model="formData.confirmPassword"
+              v-model="registrationStore.formData.confirmPassword"
               name="passTwo"
               type="password"
               placeholder="Повторите пароль"
-              @blur="validateConfirmPassword"/>
+              @blur="registrationStore.validateConfirmPassword"/>
           <span
-              v-show="errors.confirmPassword"
+              v-show="registrationStore.errors.confirmPassword"
               class="error">
-            {{errors.confirmPassword}}
+            {{registrationStore.errors.confirmPassword}}
           </span>
         </div>
       </div>
@@ -75,22 +75,23 @@
 
 <script setup lang="ts">
 import {computed} from "vue";
+import {useRegistrationStore} from "../store/registration.ts";
 
+const registrationStore = useRegistrationStore();
 const emits = defineEmits([
     "closeForm"
 ]);
-
 const changeShowForm = () => {
   emits("closeForm");
 }
 
 const isFormValid = computed(() => {
   const isAllFieldsValid =
-      formData.email?.trim() !== "" &&
-      formData.password?.trim() !== "" &&
-      formData.confirmPassword?.trim() !== "";
+      registrationStore.formData.email?.trim() !== "" &&
+      registrationStore.formData.password?.trim() !== "" &&
+      registrationStore.formData.confirmPassword?.trim() !== "";
 
-  const hasNoErrors = Object.values(errors).every(
+  const hasNoErrors = Object.values(registrationStore.errors).every(
       error => error === undefined
   );
 
