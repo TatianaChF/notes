@@ -3,7 +3,9 @@
   <router-view v-slot="{ Component }">
     <component :is="Component" :class="{'darkened': isOpenForm}" />
   </router-view>/
-  <registration-page v-show="isOpenForm" />
+  <registration-page
+      v-show="isOpenForm"
+      @close-form="isOpenForm = false" />
 </template>
 
 <script setup lang="ts">

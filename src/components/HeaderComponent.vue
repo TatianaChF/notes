@@ -16,7 +16,7 @@ const emits = defineEmits([
 ]);
 
 const changeShowForm = () => {
-  emits("showForm", true)
+  emits("showForm")
 }
 </script>
 

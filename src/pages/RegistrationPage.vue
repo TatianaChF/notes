@@ -1,6 +1,8 @@
 <template>
   <div class="container-reg">
-    <button class="btn-close">
+    <button
+        class="btn-close"
+        @click="changeShowForm">
       <img src="../assets/images/close.svg" />
     </button>
     <form @submit.prevent="handleSubmit" class="container">
@@ -100,6 +102,13 @@ const formData = reactive<FormData>({
   confirmPassword: ""
 })
 const errors = reactive<FormErrors>({});
+const emits = defineEmits([
+    "closeForm"
+]);
+
+const changeShowForm = () => {
+  emits("closeForm");
+}
 
 const validateEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
