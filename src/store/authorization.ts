@@ -60,9 +60,7 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
 
             if (data.id) {
                 resetForm();
-                console.log(data)
             } else {
-                console.log(data)
                 errors.errorForm = data.message;
             }
         } catch (error) {
