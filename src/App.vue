@@ -3,7 +3,7 @@
     <header-component @show-form="isOpenForm = true" />
     <router-view v-slot="{ Component }">
       <component :is="Component" :class="{'darkened': isOpenForm}" />
-    </router-view>/
+    </router-view>
     <authorization-component
         v-show="isOpenForm"
         @close-form="isOpenForm = false" />
