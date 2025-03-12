@@ -52,7 +52,7 @@
       </div>
       <span
           v-show="authorizationStore.errors.errorForm"
-          class="error">
+          class="error-form">
         {{authorizationStore.errors.errorForm}}
       </span>
     </form>
