@@ -1,8 +1,6 @@
 <template>
   <div class="container-reg">
-    <button
-        class="btn-close"
-        @click="changeShowForm">
+    <button class="btn-close">
       <img src="../assets/images/close.svg" />
     </button>
     <form @submit.prevent="registrationStore.handleSubmit" class="container">
@@ -78,12 +76,6 @@ import {computed} from "vue";
 import {useRegistrationStore} from "../store/registration.ts";
 
 const registrationStore = useRegistrationStore();
-const emits = defineEmits([
-    "closeForm"
-]);
-const changeShowForm = () => {
-  emits("closeForm");
-}
 
 const isFormValid = computed(() => {
   const isAllFieldsValid =

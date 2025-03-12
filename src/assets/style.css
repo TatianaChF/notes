@@ -81,7 +81,6 @@ h3 {
     gap: 10px;
 }
 
-
 h2 {
     color: #ffffff;
     font-size: 48px;
@@ -138,7 +137,14 @@ button {
     gap: 10px;
 }
 
-.error {
+.error,
+.error-form {
     color: #FF7461;
     font-size: 18px;
+}
+
+.error-form {
+    padding: 8px 20px;
+    background-color: #FF74611A;
+    border-radius: 24px;
 }

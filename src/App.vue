@@ -4,7 +4,7 @@
     <router-view v-slot="{ Component }">
       <component :is="Component" :class="{'darkened': isOpenForm}" />
     </router-view>/
-    <registration-page
+    <authorization-component
         v-show="isOpenForm"
         @close-form="isOpenForm = false" />
   </div>
@@ -14,7 +14,7 @@
 import { RouterView } from 'vue-router';
 import HeaderComponent from "./components/HeaderComponent.vue";
 import {ref} from "vue";
-import RegistrationPage from "./pages/RegistrationPage.vue";
+import AuthorizationComponent from "./components/AuthorizationComponent.vue";
 
 const isOpenForm = ref<boolean>(false);
 </script>
