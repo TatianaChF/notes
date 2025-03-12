@@ -50,6 +50,11 @@
           Зарегистрироваться
         </button>
       </div>
+      <span
+          v-show="authorizationStore.errors.errorForm"
+          class="error">
+        {{authorizationStore.errors.errorForm}}
+      </span>
     </form>
   </div>
 </template>

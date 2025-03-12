@@ -10,6 +10,7 @@ interface AuthorizationData {
 interface AuthErrors {
     email?: string;
     password?: string;
+    errorForm?: string
 }
 
 export const useAuthorizationStore = defineStore('authorizationData', () => {
@@ -62,7 +63,7 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
                 console.log(data)
             } else {
                 console.log(data)
-                errors.email = data.message;
+                errors.errorForm = data.message;
             }
         } catch (error) {
             console.log(error);
