@@ -1,5 +1,9 @@
 <template>
-<p>личная страница пользователя</p>
+<button class="btn-plus">
+  <img
+      src="../assets/images/plus.svg"
+      alt="plus" />
+</button>
 </template>
 
 <script lang="ts" setup>
