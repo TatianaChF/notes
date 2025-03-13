@@ -7,5 +7,12 @@
 </template>
 
 <script lang="ts" setup>
+import {onMounted} from "vue";
+import {usePersonalStore} from "../store/personal.ts";
 
+const personalStore = usePersonalStore();
+
+onMounted(() => {
+  personalStore.getNotes();
+})
 </script>
