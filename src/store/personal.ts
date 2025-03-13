@@ -6,8 +6,14 @@ interface Note {
     content?: string;
 }
 
+interface noteErrors {
+    title?: string;
+    content?: string;
+}
+
 export const usePersonalStore = defineStore('personalData', () => {
     let notes: Array<Note> = reactive([]);
+    const errors = reactive<noteErrors>({});
 
     const getNotes = async () => {
         const user = localStorage.getItem("user");
@@ -32,5 +38,26 @@ export const usePersonalStore = defineStore('personalData', () => {
         }
     }
 
-    return {getNotes, notes}
+    const validateTitle = (note: Note) => {
+        if (!note.title) {
+            errors.title = "Название для заметки обязательно"
+        } else if (note.title.length > 100) {
+            errors.title = "Слишком большое название"
+        } else errors.title = undefined;
+    }
+
+    const validateContent = (note: Note) => {
+        if (!note.content) {
+            errors.content = "Добавьте описание для заметки";
+        } else if (note.content.length > 500) {
+            errors.content = "Слишком большое описание"
+        } else errors.content = undefined;
+    }
+
+    const addNote = async (note: Note) => {
+        validateTitle(note);
+        validateContent(note);
+    }
+
+    return {getNotes, addNote, notes}
 })
