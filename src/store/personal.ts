@@ -1,31 +1,36 @@
 import {defineStore} from "pinia";
 import {reactive} from "vue";
 
-interface PersonalData {
-    token?: string;
-    email?: string;
+interface Note {
+    title?: string;
+    content?: string;
 }
 
 export const usePersonalStore = defineStore('personalData', () => {
-    let personalData = reactive<PersonalData>({
-        email: "",
-    });
-    const personalLocalStorage = localStorage.getItem("personal");
-
-    if (personalLocalStorage) {
-        personalData = JSON.parse(personalLocalStorage);
-    }
+    let notes: Array<Note> = reactive([]);
 
     const getNotes = async () => {
+        const user = localStorage.getItem("user");
+        let token : string = "";
+
+        if (user) {
+            token = JSON.parse(user).token;
+        }
+
         try {
             const response = await fetch("https://dist.nd.ru/api/notes", {
-                method: "GET"
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
             });
-            console.log(response);
+
+            notes = await response.json();
+            console.log(response.json());
         } catch (error) {
             console.error(error);
         }
     }
 
-    return {personalData, getNotes}
+    return {getNotes, notes}
 })

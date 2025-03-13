@@ -16,7 +16,6 @@ const personalStore = usePersonalStore();
 const authorizationStore = useAuthorizationStore();
 
 onMounted(() => {
-  console.log(authorizationStore.userData)
   personalStore.getNotes();
 })
 
