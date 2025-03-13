@@ -27,12 +27,11 @@ export const usePersonalStore = defineStore('personalData', () => {
             const response = await fetch("https://dist.nd.ru/api/notes", {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    "Authorization": `Bearer ${token}`,
                 }
             });
 
             notes = await response.json();
-            console.log(response.json());
         } catch (error) {
             console.error(error);
         }
@@ -56,10 +55,30 @@ export const usePersonalStore = defineStore('personalData', () => {
 
     const addNote = async (note: Note) => {
         try {
+            const user = localStorage.getItem("user");
+            let token : string = "";
+
+            if (user) {
+                token = JSON.parse(user).token;
+            }
+
             validateTitle(note);
             validateContent(note);
 
             if (errors.title === undefined && errors.content === undefined) {
+                const response = await fetch("https://dist.nd.ru/api/notes", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        title: note.title,
+                        content: note.content,
+                    })
+                });
+                const data = await response.json();
+                console.log(data);
                 notes.push(note);
                 console.log(note);
             }
