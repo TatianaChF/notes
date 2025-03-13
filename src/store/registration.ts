@@ -18,7 +18,8 @@ export default interface ApiResponse {
     error?: string;
     statusCode?: number;
     id?: number;
-    email?: string;
+    email?: string
+    accessToken?: string
 }
 
 export const useRegistrationStore = defineStore('registrationData', () => {

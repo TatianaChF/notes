@@ -13,12 +13,23 @@ interface AuthErrors {
     errorForm?: string
 }
 
+interface User {
+    token?: string;
+    email?: string;
+}
+
 export const useAuthorizationStore = defineStore('authorizationData', () => {
     const authorizationData: AuthorizationData = reactive<AuthorizationData>({
         email: "",
         password: ""
     });
     const errors: AuthErrors = reactive({});
+    let userData: User = reactive({});
+    let userLocalStorage = localStorage.getItem("user");
+
+    if (userLocalStorage) {
+        userData = JSON.parse(userLocalStorage);
+    }
 
     const validateEmail = () => {
         if (!authorizationData.email) {
@@ -58,7 +69,10 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
             });
             const data: ApiResponse = await response.json();
 
-            if (data.id) {
+            if (data.accessToken) {
+                userData.token = data.accessToken;
+                userData.email = authorizationData.email;
+                localStorage.setItem("user", JSON.stringify(userData));
                 resetForm();
             } else {
                 errors.errorForm = data.message;
@@ -68,5 +82,5 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         }
     };
 
-    return {authorizationData, errors, validateEmail, validatePassword, handleSubmit}
+    return {authorizationData, errors, userData, validateEmail, validatePassword, handleSubmit}
 })

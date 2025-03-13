@@ -47,7 +47,7 @@
           <a href="#">Зарегистрируйтесь</a>
         </div>
         <button type="submit">
-          Зарегистрироваться
+          Войти
         </button>
       </div>
       <span
