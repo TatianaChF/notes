@@ -1,7 +1,8 @@
 <template>
   <div class="container-reg">
     <button
-        class="btn-close">
+        class="btn-close"
+        @click="closeForm">
       <img src="../assets/images/close.svg" />
     </button>
     <div class="container">
@@ -33,5 +34,9 @@
 </template>
 
 <script lang="ts" setup>
+const emits = defineEmits(["closeForm"]);
 
+const closeForm = () => {
+  emits("closeForm");
+}
 </script>
