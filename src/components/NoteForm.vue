@@ -1,7 +1,7 @@
 <template>
   <div class="container-reg">
     <button
-        class="btn-close"
+        class="btn-close-note"
         @click="closeForm">
       <img src="../assets/images/close.svg" />
     </button>
@@ -26,9 +26,11 @@
               placeholder="Введите текст" />
         </div>
       </div>
-      <button type="submit">
-        Добавить
-      </button>
+      <div class="btn-note">
+        <button type="submit">
+          Добавить
+        </button>
+      </div>
     </div>
   </div>
 </template>
