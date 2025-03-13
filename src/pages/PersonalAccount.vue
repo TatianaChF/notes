@@ -1,5 +1,9 @@
 <template>
   {{authorizationStore.userData.email}}
+  <div v-for="note in personalStore.notes">
+    {{note.title}}
+    {{note.content}}
+  </div>
   <note-form
       v-show="isOpenForm"
       @close-form="isOpenForm = false"/>

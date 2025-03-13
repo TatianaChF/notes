@@ -55,8 +55,17 @@ export const usePersonalStore = defineStore('personalData', () => {
     }
 
     const addNote = async (note: Note) => {
-        validateTitle(note);
-        validateContent(note);
+        try {
+            validateTitle(note);
+            validateContent(note);
+
+            if (errors.title === undefined && errors.content === undefined) {
+                notes.push(note);
+                console.log(note);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return {getNotes, addNote, notes}

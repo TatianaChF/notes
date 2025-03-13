@@ -13,6 +13,7 @@
             Название заметки
           </label>
           <input
+              v-model="note.title"
               name="title"
               type="text"
               placeholder="Введите название"/>
@@ -22,12 +23,15 @@
             Текст заметки
           </label>
           <textarea
+              v-model="note.content"
               name="text"
               placeholder="Введите текст" />
         </div>
       </div>
       <div class="btn-note">
-        <button type="submit">
+        <button
+            type="submit"
+            @click="personalStore.addNote(note)">
           Добавить
         </button>
       </div>
@@ -36,7 +40,15 @@
 </template>
 
 <script lang="ts" setup>
+import {usePersonalStore} from "../store/personal.ts";
+import {ref} from "vue";
+
+const note = ref({
+  title: "",
+  content: ""
+});
 const emits = defineEmits(["closeForm"]);
+const personalStore = usePersonalStore();
 
 const closeForm = () => {
   emits("closeForm");
