@@ -169,6 +169,32 @@ button {
     gap: 10px;
 }
 
+.note {
+    width: 506px;
+    padding: 1px 20px;
+    border-radius: 12px;
+    background-color: #B1C909;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    max-width: 480px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    min-height: 150px;
+}
+
+.note-divider {
+    border: 0;
+    height: 1px;
+    background: #A5BB0C;
+    margin: 0 1px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
 .error,
 .error-form {
     color: #FF7461;

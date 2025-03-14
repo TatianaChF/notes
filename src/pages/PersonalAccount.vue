@@ -2,9 +2,11 @@
   {{authorizationStore.userData.email}}
   <div
       v-for="note in personalStore.notes"
-      :key="note.title">
-    {{note.title}}
-    {{note.content}}
+      :key="note.title"
+      class="note">
+    <h4>{{note.title}}</h4>
+    <hr class="note-divider" />
+    <p>{{note.content}}</p>
   </div>
   <note-form
       v-show="isOpenForm"
