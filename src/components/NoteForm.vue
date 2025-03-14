@@ -3,7 +3,7 @@
     <button
         class="btn-close-note"
         @click="closeForm">
-      <img src="../assets/images/close.svg" />
+      <img src="../assets/images/close.svg" alt="close" />
     </button>
     <div class="container">
       <h2>Добавление заметки</h2>
