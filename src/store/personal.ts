@@ -63,6 +63,15 @@ export const usePersonalStore = defineStore('personalData', () => {
         } else errors.content = undefined;
     }
 
+    const resetForm = (note: Note) => {
+        note.title = "";
+        note.content = "";
+
+        Object.keys(errors).forEach(key => {
+            errors[key as keyof noteErrors] = undefined;
+        });
+    }
+
     const addNote = async (note: Note) => {
         try {
             const user = localStorage.getItem("user");
@@ -88,9 +97,12 @@ export const usePersonalStore = defineStore('personalData', () => {
                     })
                 });
                 const data = await response.json();
+
+                if (errors.title === undefined && errors.content === undefined) {
+                    notes.push(note);
+                    resetForm(note);
+                }
                 console.log(data);
-                notes.push(note);
-                console.log(note);
             }
         } catch (error) {
             console.log(error);

@@ -169,8 +169,16 @@ button {
     gap: 10px;
 }
 
+.notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 50px;
+    margin-top: 10px;
+}
+
 .note {
-    width: 506px;
+    width: 306px;
     padding: 1px 20px;
     border-radius: 12px;
     background-color: #B1C909;
