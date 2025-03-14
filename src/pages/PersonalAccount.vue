@@ -8,6 +8,10 @@
       <h4>{{note.title}}</h4>
       <hr class="note-divider" />
       <p>{{note.content}}</p>
+      <div class="note-delete">
+        <img src="../assets/images/close.svg" alt="delete" />
+        <p>Удалить</p>
+      </div>
     </div>
   </div>
   <note-form
