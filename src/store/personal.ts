@@ -31,7 +31,20 @@ export const usePersonalStore = defineStore('personalData', () => {
                 }
             });
 
-            notes = await response.json();
+            const data = await response.json();
+
+            console.log(data);
+
+            if (data.length > 0) {
+                for (let i = 0; i < data.length; i++) {
+                    const newNote: Note = {
+                        title: data[i].title,
+                        content: data[i].content,
+                    };
+                    notes.push(newNote);
+                }
+            }
+            console.log(notes);
         } catch (error) {
             console.error(error);
         }
