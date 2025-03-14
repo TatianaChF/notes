@@ -1,6 +1,8 @@
 <template>
   {{authorizationStore.userData.email}}
-  <div v-for="note in personalStore.notes">
+  <div
+      v-for="note in personalStore.notes"
+      :key="note.title">
     {{note.title}}
     {{note.content}}
   </div>
@@ -28,6 +30,7 @@ const isOpenForm = ref(false);
 
 onMounted(() => {
   personalStore.getNotes();
+  console.log(personalStore.notes);
 })
 
 </script>
