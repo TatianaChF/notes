@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {reactive} from "vue";
 
 export interface Note {
+    id?: number;
     title?: string;
     content?: string;
 }
@@ -36,6 +37,7 @@ export const usePersonalStore = defineStore('personalData', () => {
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {
                     const newNote: Note = {
+                        id: data[i].id,
                         title: data[i].title,
                         content: data[i].content,
                     };
@@ -109,5 +111,13 @@ export const usePersonalStore = defineStore('personalData', () => {
         }
     }
 
-    return {getNotes, addNote, notes}
+    const removeNote = (note: Note) => {
+        try {
+            console.log(note.id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    return {getNotes, addNote, removeNote, notes}
 })
