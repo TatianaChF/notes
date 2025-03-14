@@ -30,7 +30,6 @@ const isOpenForm = ref(false);
 
 onMounted(() => {
   personalStore.getNotes();
-  console.log(personalStore.notes);
 })
 
 </script>

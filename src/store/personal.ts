@@ -33,8 +33,6 @@ export const usePersonalStore = defineStore('personalData', () => {
 
             const data = await response.json();
 
-            console.log(data);
-
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {
                     const newNote: Note = {
@@ -44,7 +42,6 @@ export const usePersonalStore = defineStore('personalData', () => {
                     notes.push(newNote);
                 }
             }
-            console.log(notes);
         } catch (error) {
             console.error(error);
         }
