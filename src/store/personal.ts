@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {reactive} from "vue";
 
-interface Note {
+export interface Note {
     title?: string;
     content?: string;
 }

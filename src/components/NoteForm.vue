@@ -31,7 +31,7 @@
       <div class="btn-note">
         <button
             type="submit"
-            @click="personalStore.addNote(note)">
+            @click="addNote(note)">
           Добавить
         </button>
       </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import {usePersonalStore} from "../store/personal.ts";
+import {type Note, usePersonalStore} from "../store/personal.ts";
 import {ref} from "vue";
 
 const note = ref({
@@ -51,6 +51,11 @@ const emits = defineEmits(["closeForm"]);
 const personalStore = usePersonalStore();
 
 const closeForm = () => {
+  emits("closeForm");
+}
+
+const addNote = (note: Note) => {
+  personalStore.addNote(note);
   emits("closeForm");
 }
 </script>
