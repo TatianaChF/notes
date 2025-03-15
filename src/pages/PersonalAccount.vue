@@ -30,12 +30,10 @@
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import {usePersonalStore} from "../store/personal.ts";
-import {useAuthorizationStore} from "../store/authorization.ts";
 import NoteForm from "../components/NoteForm.vue";
 import {storeToRefs} from "pinia";
 
 const personalStore = usePersonalStore();
-const authorizationStore = useAuthorizationStore();
 const isOpenForm = ref(false);
 const { notes } = storeToRefs(personalStore);
 
