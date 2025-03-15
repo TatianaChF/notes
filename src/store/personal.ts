@@ -101,7 +101,11 @@ export const usePersonalStore = defineStore('personalData', () => {
                 const data = await response.json();
 
                 if (errors.title === undefined && errors.content === undefined) {
-                    notes.value.push(note);
+                    const newNote = {
+                        title: note.title,
+                        content: note.content,
+                    }
+                    notes.value.push(newNote);
                     resetForm(note);
                 }
                 console.log(data);
