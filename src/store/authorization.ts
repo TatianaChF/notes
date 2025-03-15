@@ -82,5 +82,31 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         }
     };
 
-    return {authorizationData, errors, userData, validateEmail, validatePassword, handleSubmit}
+    const logout = async () => {
+        try {
+            let token : string = "";
+
+            if (userLocalStorage) {
+                token = JSON.parse(userLocalStorage).token;
+            }
+
+            const response = await fetch('https://dist.nd.ru/api/auth', {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+            const data = await response.json();
+            userData.email = undefined;
+            userData.token = undefined;
+            localStorage.setItem("user", JSON.stringify(userData));
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    return {authorizationData, errors, userData,
+        validateEmail, validatePassword, handleSubmit,
+        logout}
 })
