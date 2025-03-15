@@ -7,12 +7,6 @@ interface AuthorizationData {
     password: string;
 }
 
-interface AuthErrors {
-    email?: string;
-    password?: string;
-    errorForm?: string
-}
-
 interface User {
     token: string;
     email: string | undefined;
@@ -23,12 +17,12 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         email: "",
         password: ""
     });
-    const errors: AuthErrors = reactive({});
+    const errors = ref<string | undefined>(undefined);
     let userData = ref<User>({
         token: "",
         email: ""
     });
-    let email = ref<string | undefined>(undefined);
+    let email = ref<string | undefined>();
     let userLocalStorage = localStorage.getItem("user");
 
     if (userLocalStorage) {
@@ -36,25 +30,10 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         email.value = JSON.parse(userLocalStorage).email;
     }
 
-    const validateEmail = () => {
-        if (!authorizationData.email) {
-            errors.email = "Email обязателен для входа";
-        } else errors.email = undefined;
-    };
-
-    const validatePassword = () => {
-        if (!authorizationData.password) {
-            errors.password = "Пароль обязателен для входа";
-        } else errors.password = undefined;
-    };
-
     const resetForm = () => {
         authorizationData.email = "";
         authorizationData.password = "";
-
-        Object.keys(errors).forEach(key => {
-            errors[key as keyof AuthErrors] = undefined;
-        });
+        errors.value = undefined;
     }
 
     const getUser = async () => {
@@ -81,9 +60,6 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
 
     const handleSubmit = async () => {
         try {
-            validateEmail();
-            validatePassword();
-
             const response = await fetch('https://dist.nd.ru/api/auth', {
                 method: "POST",
                 headers: {
@@ -100,10 +76,14 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
                 userData.value.token = data.accessToken;
                 userData.value.email = authorizationData.email;
                 email.value = authorizationData.email;
+                console.log(errors.value);
                 localStorage.setItem("user", JSON.stringify(userData.value));
                 resetForm();
             } else {
-                console.log(data.message);
+                if (typeof data.message === "object") {
+                    errors.value = data.message[0];
+                } else errors.value = data.message;
+
             }
         } catch (error) {
             console.log(error);
@@ -136,6 +116,6 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
     }
 
     return {authorizationData, errors, userData,
-        validateEmail, validatePassword, handleSubmit,
-        logout, getUser, email}
+        handleSubmit, logout, getUser,
+        email}
 })
