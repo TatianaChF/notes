@@ -1,6 +1,8 @@
 <template>
   <div class="container-reg">
-    <button class="btn-close">
+    <button
+        class="btn-close"
+        @click="emits('closeForm')">
       <img src="../assets/images/close.svg" />
     </button>
     <form @submit.prevent="registrationStore.handleSubmit" class="container">
@@ -58,7 +60,11 @@
       <div class="link-container">
         <div class="link">
           <p>У вас есть аккаунт?</p>
-          <a href="#">Войдите</a>
+          <a
+              href="#"
+              @click="emits('changeForm')">
+            Войдите
+          </a>
         </div>
         <button
             type="submit"
@@ -76,6 +82,9 @@ import {computed} from "vue";
 import {useRegistrationStore} from "../store/registration.ts";
 
 const registrationStore = useRegistrationStore();
+const emits = defineEmits([
+    "closeForm", "changeForm"
+]);
 
 const isFormValid = computed(() => {
   const isAllFieldsValid =

@@ -44,7 +44,11 @@
       <div class="link-container">
         <div class="link">
           <p>У вас нет аккаунта?</p>
-          <a href="#">Зарегистрируйтесь</a>
+          <a
+              href="#"
+              @click="emits('changeForm')">
+            Зарегистрируйтесь
+          </a>
         </div>
         <button
             type="submit"
@@ -69,7 +73,7 @@ const authorizationStore = useAuthorizationStore();
 const router = useRouter();
 
 const emits = defineEmits([
-  "closeForm"
+  "closeForm", "changeForm"
 ]);
 const changeShowForm = () => {
   emits("closeForm");
