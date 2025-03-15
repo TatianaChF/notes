@@ -28,7 +28,7 @@
         class="container-logout">
       <a
           href="#"
-          @click="authorizationStore.logout">
+          @click="logoutUser">
         Выйти
       </a>
     </div>
@@ -39,25 +39,26 @@
 import {onMounted, ref} from "vue";
 import {useAuthorizationStore} from "../store/authorization.ts";
 import {storeToRefs} from "pinia";
+import {useRouter} from "vue-router";
 
-const user = localStorage.getItem("user");
 const isOpenLogout = ref<boolean>(false);
 const authorizationStore = useAuthorizationStore();
 const {email} = storeToRefs(authorizationStore);
-console.log(email.value);
+const router = useRouter();
+const emits = defineEmits([
+  "showForm"
+]);
 
 onMounted(() => {
   authorizationStore.getUser();
 })
 
-if (user) {
-  email.value = JSON.parse(user).email;
-}
-
-const emits = defineEmits([
-    "showForm"
-]);
 const changeShowForm = () => {
   emits("showForm");
+}
+const logoutUser = () => {
+  authorizationStore.logout();
+  isOpenLogout.value = false;
+  router.push({name: "Main"});
 }
 </script>

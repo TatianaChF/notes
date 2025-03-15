@@ -15,7 +15,7 @@ interface AuthErrors {
 
 interface User {
     token: string;
-    email: string;
+    email: string | undefined;
 }
 
 export const useAuthorizationStore = defineStore('authorizationData', () => {
@@ -125,10 +125,10 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
                 }
             });
             const data = await response.json();
-            userData.value.email = "";
-            email.value = "";
+            userData.value.email = undefined;
+            email.value = undefined;
             userData.value.token = "";
-            localStorage.setItem("user", JSON.stringify(userData.value));
+            localStorage.removeItem("user");
             console.log(data);
         } catch (error) {
             console.log(error);
