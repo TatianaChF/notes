@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 
 export interface Note {
     id?: number;
@@ -13,7 +13,7 @@ interface noteErrors {
 }
 
 export const usePersonalStore = defineStore('personalData', () => {
-    let notes: Array<Note> = reactive([]);
+    let notes = ref<Array<Note>>([]);
     const errors = reactive<noteErrors>({});
 
     const getNotes = async () => {
@@ -41,7 +41,7 @@ export const usePersonalStore = defineStore('personalData', () => {
                         title: data[i].title,
                         content: data[i].content,
                     };
-                    notes.push(newNote);
+                    notes.value.push(newNote);
                 }
             }
         } catch (error) {
@@ -101,7 +101,7 @@ export const usePersonalStore = defineStore('personalData', () => {
                 const data = await response.json();
 
                 if (errors.title === undefined && errors.content === undefined) {
-                    notes.push(note);
+                    notes.value.push(note);
                     resetForm(note);
                 }
                 console.log(data);
@@ -111,9 +111,24 @@ export const usePersonalStore = defineStore('personalData', () => {
         }
     }
 
-    const removeNote = (note: Note) => {
+    const removeNote = async (note: Note) => {
         try {
-            console.log(note.id);
+            const user = localStorage.getItem("user");
+            let token : string = "";
+
+            if (user) {
+                token = JSON.parse(user).token;
+            }
+
+            notes.value = notes.value.filter((noteData: Note) => noteData.id !== note.id);
+            console.log(notes);
+            const response = await fetch(`https://dist.nd.ru/api/notes/${note.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
