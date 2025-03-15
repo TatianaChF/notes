@@ -1,5 +1,4 @@
 <template>
-  {{authorizationStore.userData.email}}
   <div class="notes-container">
     <div
         v-for="note in notes"
