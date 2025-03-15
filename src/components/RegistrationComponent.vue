@@ -73,6 +73,7 @@
           Зарегистрироваться
         </button>
       </div>
+      <p v-show="message">{{message}}</p>
     </form>
   </div>
 </template>
@@ -80,11 +81,13 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import {useRegistrationStore} from "../store/registration.ts";
+import {storeToRefs} from "pinia";
 
 const registrationStore = useRegistrationStore();
 const emits = defineEmits([
     "closeForm", "changeForm"
 ]);
+const {message} = storeToRefs(registrationStore);
 
 const isFormValid = computed(() => {
   const isAllFieldsValid =
