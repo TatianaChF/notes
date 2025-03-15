@@ -1,15 +1,21 @@
 <template>
   <header class="header">
     <img src="../assets/images/logo.svg" alt="logo" />
-    <div
-        v-if="email != ''"
-        class="user-container">
-      <p>{{email}}</p>
-      <button class="btn-user">
-        <img
-            src="../assets/images/user.svg"
-            alt="user" />
-      </button>
+    <div v-if="email != ''">
+      <div
+          class="user-container">
+        <p>{{email}}</p>
+        <button
+            class="btn-user"
+            @click="isOpenLogout = !isOpenLogout">
+          <img
+              src="../assets/images/user.svg"
+              alt="user" />
+        </button>
+      </div>
+      <div v-show="isOpenLogout">
+        <a href="#">Выйти</a>
+      </div>
     </div>
     <button
         v-else
@@ -26,6 +32,7 @@ import {ref} from "vue";
 
 const user = localStorage.getItem("user");
 const email = ref<string>("");
+const isOpenLogout = ref<boolean>(false);
 
 if (user) {
   email.value = JSON.parse(user).email;
