@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
-import {type Note, usePersonalStore} from "../store/personal.ts";
+import {usePersonalStore} from "../store/personal.ts";
 import {useAuthorizationStore} from "../store/authorization.ts";
 import NoteForm from "../components/NoteForm.vue";
 import {storeToRefs} from "pinia";
