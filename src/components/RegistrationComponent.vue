@@ -3,7 +3,7 @@
     <button
         class="btn-close"
         @click="emits('closeForm')">
-      <img src="../assets/images/close.svg" />
+      <img src="../assets/images/close.svg" alt="close" />
     </button>
     <form @submit.prevent="registrationStore.handleSubmit" class="container">
       <h2>Регистрация</h2>
