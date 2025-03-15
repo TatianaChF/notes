@@ -13,11 +13,6 @@
               alt="user" />
         </button>
       </div>
-      <div
-          v-show="isOpenLogout"
-          class="container-logout">
-        <a href="#">Выйти</a>
-      </div>
     </div>
     <button
         v-else
@@ -27,6 +22,13 @@
         Вход
     </button>
   </header>
+  <div class="logout">
+    <div
+        v-show="isOpenLogout"
+        class="container-logout">
+      <a href="#">Выйти</a>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -47,24 +49,3 @@ const changeShowForm = () => {
   emits("showForm")
 }
 </script>
-
-<style scoped>
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.login-btn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 144px;
-  height: 56px;
-  background-color: #B1C909;
-  border-radius: 32px;
-  border: none;
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-}
-</style>
