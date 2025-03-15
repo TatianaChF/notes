@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import type ApiResponse from "./registration.ts";
 
 interface AuthorizationData {
@@ -24,11 +24,11 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         password: ""
     });
     const errors: AuthErrors = reactive({});
-    let userData: User = reactive({});
+    let userData = ref<User>({});
     let userLocalStorage = localStorage.getItem("user");
 
     if (userLocalStorage) {
-        userData = JSON.parse(userLocalStorage);
+        userData.value = JSON.parse(userLocalStorage);
     }
 
     const validateEmail = () => {
@@ -70,8 +70,8 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
             const data: ApiResponse = await response.json();
 
             if (data.accessToken) {
-                userData.token = data.accessToken;
-                userData.email = authorizationData.email;
+                userData.value.token = data.accessToken;
+                userData.value.email = authorizationData.email;
                 localStorage.setItem("user", JSON.stringify(userData));
                 resetForm();
             } else {
@@ -97,8 +97,8 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
                 }
             });
             const data = await response.json();
-            userData.email = undefined;
-            userData.token = undefined;
+            userData.value.email = undefined;
+            userData.value.token = undefined;
             localStorage.setItem("user", JSON.stringify(userData));
             console.log(data);
         } catch (error) {
