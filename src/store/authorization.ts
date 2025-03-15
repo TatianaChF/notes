@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import type ApiResponse from "./registration.ts";
 
 interface AuthorizationData {
@@ -7,10 +7,9 @@ interface AuthorizationData {
     password: string;
 }
 
-interface AuthErrors {
-    email?: string;
-    password?: string;
-    errorForm?: string
+interface User {
+    token: string;
+    email: string | undefined;
 }
 
 export const useAuthorizationStore = defineStore('authorizationData', () => {
@@ -18,34 +17,49 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         email: "",
         password: ""
     });
-    const errors: AuthErrors = reactive({});
+    const errors = ref<string | undefined>(undefined);
+    let userData = ref<User>({
+        token: "",
+        email: ""
+    });
+    let email = ref<string | undefined>();
+    let userLocalStorage = localStorage.getItem("user");
 
-    const validateEmail = () => {
-        if (!authorizationData.email) {
-            errors.email = "Email обязателен для входа";
-        } else errors.email = undefined;
-    };
-
-    const validatePassword = () => {
-        if (!authorizationData.password) {
-            errors.password = "Пароль обязателен для входа";
-        } else errors.password = undefined;
-    };
+    if (userLocalStorage) {
+        userData.value = JSON.parse(userLocalStorage);
+        email.value = JSON.parse(userLocalStorage).email;
+    }
 
     const resetForm = () => {
         authorizationData.email = "";
         authorizationData.password = "";
+        errors.value = undefined;
+    }
 
-        Object.keys(errors).forEach(key => {
-            errors[key as keyof AuthErrors] = undefined;
-        });
+    const getUser = async () => {
+        try {
+            let token : string = "";
+
+            if (userLocalStorage) {
+                token = JSON.parse(userLocalStorage).token;
+            }
+
+            const response = await fetch('https://dist.nd.ru/api/auth', {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+            const data = await response.json();
+            userData.value.email = data.email;
+            email.value = data.email;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const handleSubmit = async () => {
         try {
-            validateEmail();
-            validatePassword();
-
             const response = await fetch('https://dist.nd.ru/api/auth', {
                 method: "POST",
                 headers: {
@@ -58,15 +72,50 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
             });
             const data: ApiResponse = await response.json();
 
-            if (data.id) {
+            if (data.accessToken) {
+                userData.value.token = data.accessToken;
+                userData.value.email = authorizationData.email;
+                email.value = authorizationData.email;
+                console.log(errors.value);
+                localStorage.setItem("user", JSON.stringify(userData.value));
                 resetForm();
             } else {
-                errors.errorForm = data.message;
+                if (typeof data.message === "object") {
+                    errors.value = data.message[0];
+                } else errors.value = data.message;
+
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    return {authorizationData, errors, validateEmail, validatePassword, handleSubmit}
+    const logout = async () => {
+        try {
+            let token : string = "";
+
+            if (userLocalStorage) {
+                token = JSON.parse(userLocalStorage).token;
+            }
+
+            const response = await fetch('https://dist.nd.ru/api/auth', {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+            const data = await response.json();
+            userData.value.email = undefined;
+            email.value = undefined;
+            userData.value.token = "";
+            localStorage.removeItem("user");
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    return {authorizationData, errors, userData,
+        handleSubmit, logout, getUser,
+        email}
 })

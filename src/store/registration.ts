@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 
 interface FormData {
     email?: string;
@@ -18,7 +18,8 @@ export default interface ApiResponse {
     error?: string;
     statusCode?: number;
     id?: number;
-    email?: string;
+    email?: string
+    accessToken?: string
 }
 
 export const useRegistrationStore = defineStore('registrationData', () => {
@@ -28,6 +29,7 @@ export const useRegistrationStore = defineStore('registrationData', () => {
         confirmPassword: ""
     });
     const errors = reactive<FormErrors>({});
+    const message = ref<string | undefined>(undefined);
 
     const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -85,6 +87,7 @@ export const useRegistrationStore = defineStore('registrationData', () => {
 
             if (data.id) {
                 resetForm();
+                message.value = "Вы успешно зарегистрировались. Войдите в аккаунт"
             } else {
                 errors.email = data.message;
             }
@@ -94,5 +97,6 @@ export const useRegistrationStore = defineStore('registrationData', () => {
     };
 
     return {formData, errors, handleSubmit,
-        validateEmail, validatePassword, validateConfirmPassword}
+        validateEmail, validatePassword, validateConfirmPassword,
+        message}
 })
