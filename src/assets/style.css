@@ -173,6 +173,31 @@ button {
     margin-top: 30px;
 }
 
+.container-logout {
+    width: 145px;
+    padding: 40px;
+    margin-left: 45px;
+    margin-top: 10px;
+    background-color: #1B2F46;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.37);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+}
+
+.container-logout::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 85%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-bottom-color: #1B2F46;
+    z-index: 1;
+}
+
 .link {
     display: flex;
     align-items: center;

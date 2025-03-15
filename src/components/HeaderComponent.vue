@@ -13,7 +13,9 @@
               alt="user" />
         </button>
       </div>
-      <div v-show="isOpenLogout">
+      <div
+          v-show="isOpenLogout"
+          class="container-logout">
         <a href="#">Выйти</a>
       </div>
     </div>
