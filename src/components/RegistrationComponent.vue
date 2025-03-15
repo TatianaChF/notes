@@ -31,9 +31,21 @@
           <input
               v-model="registrationStore.formData.password"
               name="password"
-              type="password"
+              :type="showPassword ? 'text' : 'password'"
               placeholder="Введите пароль"
               @blur="registrationStore.validatePassword"/>
+          <button
+              v-if="showPassword"
+              class="toggle-pass-reg"
+              @click="showPassword = !showPassword">
+            <img src="../assets/images/openPass.svg" alt="openEye" />
+          </button>
+          <button
+              v-else
+              class="toggle-pass-reg"
+              @click="showPassword = !showPassword">
+            <img src="../assets/images/closePas.svg" alt="closeEye" />
+          </button>
           <span
               v-show="registrationStore.errors.password"
               class="error">
@@ -47,9 +59,21 @@
           <input
               v-model="registrationStore.formData.confirmPassword"
               name="passTwo"
-              type="password"
+              :type="showConfirmPassword ? 'text' : 'password'"
               placeholder="Повторите пароль"
               @blur="registrationStore.validateConfirmPassword"/>
+          <button
+              v-if="showConfirmPassword"
+              class="toggle-pass-conf"
+              @click="showConfirmPassword = !showConfirmPassword">
+            <img src="../assets/images/openPass.svg" alt="openEye" />
+          </button>
+          <button
+              v-else
+              class="toggle-pass-conf"
+              @click="showConfirmPassword = !showConfirmPassword">
+            <img src="../assets/images/closePas.svg" alt="closeEye" />
+          </button>
           <span
               v-show="registrationStore.errors.confirmPassword"
               class="error">
@@ -79,10 +103,12 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {useRegistrationStore} from "../store/registration.ts";
 import {storeToRefs} from "pinia";
 
+const showPassword = ref<boolean>(false);
+const showConfirmPassword = ref<boolean>(false);
 const registrationStore = useRegistrationStore();
 const emits = defineEmits([
     "closeForm", "changeForm"

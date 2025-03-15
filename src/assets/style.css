@@ -280,3 +280,28 @@ h4 {
     background-color: #FF74611A;
     border-radius: 24px;
 }
+
+.toggle-pass,
+.toggle-pass-reg,
+.toggle-pass-conf {
+    background: none;
+    position: absolute;
+    right: 90px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.toggle-pass {
+    top: 65%;
+}
+
+.toggle-pass-reg {
+    top: 56%;
+}
+
+.toggle-pass-conf {
+    top: 73%;
+}

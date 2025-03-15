@@ -27,8 +27,20 @@
           <input
               v-model="authorizationStore.authorizationData.password"
               name="password"
-              type="password"
+              :type="showPassword ? 'text' : 'password'"
               placeholder="Введите пароль"/>
+          <button
+              v-if="showPassword"
+              class="toggle-pass"
+              @click="showPassword = !showPassword">
+            <img src="../assets/images/openPass.svg" alt="openEye" />
+          </button>
+          <button
+              v-else
+              class="toggle-pass"
+              @click="showPassword = !showPassword">
+            <img src="../assets/images/closePas.svg" alt="closeEye" />
+          </button>
         </div>
       </div>
       <div class="link-container">
@@ -56,7 +68,9 @@
 <script lang='ts' setup>
 import {useAuthorizationStore} from "../store/authorization.ts";
 import {useRouter} from "vue-router";
+import {ref} from "vue";
 
+const showPassword = ref<boolean>(false);
 const authorizationStore = useAuthorizationStore();
 const router = useRouter();
 
