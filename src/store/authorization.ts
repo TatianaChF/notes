@@ -75,7 +75,7 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
                 localStorage.setItem("user", JSON.stringify(userData));
                 resetForm();
             } else {
-                errors.errorForm = data.message;
+                console.log(data.message);
             }
         } catch (error) {
             console.log(error);

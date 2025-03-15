@@ -46,7 +46,9 @@
           <p>У вас нет аккаунта?</p>
           <a href="#">Зарегистрируйтесь</a>
         </div>
-        <button type="submit">
+        <button
+            type="submit"
+            @click="authChangeForm">
           Войти
         </button>
       </div>
@@ -61,13 +63,21 @@
 
 <script lang='ts' setup>
 import {useAuthorizationStore} from "../store/authorization.ts";
+import {useRouter} from "vue-router";
 
 const authorizationStore = useAuthorizationStore();
+const router = useRouter();
+
 const emits = defineEmits([
   "closeForm"
 ]);
-
 const changeShowForm = () => {
   emits("closeForm");
+}
+const authChangeForm = () => {
+  if (authorizationStore.authorizationData.email !== "" && authorizationStore.authorizationData.password !== "") {
+    emits("closeForm");
+    router.push({name: "PersonalAccount"})
+  }
 }
 </script>
