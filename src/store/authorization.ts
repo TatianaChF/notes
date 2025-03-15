@@ -14,8 +14,8 @@ interface AuthErrors {
 }
 
 interface User {
-    token?: string;
-    email?: string;
+    token: string;
+    email: string;
 }
 
 export const useAuthorizationStore = defineStore('authorizationData', () => {
@@ -24,11 +24,16 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         password: ""
     });
     const errors: AuthErrors = reactive({});
-    let userData = ref<User>({});
+    let userData = ref<User>({
+        token: "",
+        email: ""
+    });
+    let email = ref<string | undefined>(undefined);
     let userLocalStorage = localStorage.getItem("user");
 
     if (userLocalStorage) {
         userData.value = JSON.parse(userLocalStorage);
+        email.value = JSON.parse(userLocalStorage).email;
     }
 
     const validateEmail = () => {
@@ -52,6 +57,28 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
         });
     }
 
+    const getUser = async () => {
+        try {
+            let token : string = "";
+
+            if (userLocalStorage) {
+                token = JSON.parse(userLocalStorage).token;
+            }
+
+            const response = await fetch('https://dist.nd.ru/api/auth', {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+            const data = await response.json();
+            userData.value.email = data.email;
+            email.value = data.email;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleSubmit = async () => {
         try {
             validateEmail();
@@ -72,7 +99,8 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
             if (data.accessToken) {
                 userData.value.token = data.accessToken;
                 userData.value.email = authorizationData.email;
-                localStorage.setItem("user", JSON.stringify(userData));
+                email.value = authorizationData.email;
+                localStorage.setItem("user", JSON.stringify(userData.value));
                 resetForm();
             } else {
                 console.log(data.message);
@@ -97,9 +125,10 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
                 }
             });
             const data = await response.json();
-            userData.value.email = undefined;
-            userData.value.token = undefined;
-            localStorage.setItem("user", JSON.stringify(userData));
+            userData.value.email = "";
+            email.value = "";
+            userData.value.token = "";
+            localStorage.setItem("user", JSON.stringify(userData.value));
             console.log(data);
         } catch (error) {
             console.log(error);
@@ -108,5 +137,5 @@ export const useAuthorizationStore = defineStore('authorizationData', () => {
 
     return {authorizationData, errors, userData,
         validateEmail, validatePassword, handleSubmit,
-        logout}
+        logout, getUser, email}
 })

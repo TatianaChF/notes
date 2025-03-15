@@ -36,13 +36,19 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useAuthorizationStore} from "../store/authorization.ts";
+import {storeToRefs} from "pinia";
 
 const user = localStorage.getItem("user");
-const email = ref<string>("");
 const isOpenLogout = ref<boolean>(false);
 const authorizationStore = useAuthorizationStore();
+const {email} = storeToRefs(authorizationStore);
+console.log(email.value);
+
+onMounted(() => {
+  authorizationStore.getUser();
+})
 
 if (user) {
   email.value = JSON.parse(user).email;
@@ -52,6 +58,6 @@ const emits = defineEmits([
     "showForm"
 ]);
 const changeShowForm = () => {
-  emits("showForm")
+  emits("showForm");
 }
 </script>
