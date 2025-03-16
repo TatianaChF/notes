@@ -1,7 +1,7 @@
 <template>
   <div class="container-reg">
     <button
-        class="btn-close"
+        class="btn-close-reg"
         @click="changeShowForm">
       <img src="../assets/images/close.svg" />
     </button>

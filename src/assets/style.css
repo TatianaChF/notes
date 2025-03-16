@@ -140,6 +140,7 @@ button {
 }
 
 .btn-close,
+.btn-close-reg,
 .btn-close-note {
     border-radius: 32px;
     width: 56px;
@@ -149,7 +150,8 @@ button {
     justify-content: center;
 }
 
-.btn-close {
+.btn-close,
+.btn-close-reg {
     margin-right: -650px;
     margin-top: -50px;
 }
@@ -337,6 +339,27 @@ h4 {
     .main-image {
         width: 100%;
     }
+
+    .container-reg {
+        left: 0;
+        width: 688px;
+        height: 560px;
+    }
+
+    .btn-close {
+        margin-right: -600px;
+        margin-top: -80px;
+    }
+
+    .btn-close-reg {
+        margin-right: -600px;
+        margin-top: -20px;
+    }
+
+    .toggle-pass {
+        top: 72%;
+        left: 90%;
+    }
 }
 
 @media (max-width: 360px) {
@@ -366,5 +389,49 @@ h4 {
 
     .main-image {
         width: 130%;
+    }
+
+    .container-reg {
+        left: -14px;
+        width: 352px;
+        height: 632px;
+    }
+
+    .btn-close {
+        margin-right: -600px;
+        margin-top: -80px;
+    }
+
+    .btn-close-reg {
+        margin-right: -250px;
+        margin-top: -70px;
+    }
+
+    .toggle-pass {
+        top: 63%;
+        left: 88%;
+    }
+
+    h2 {
+        font-size: 32px;
+        width: 320px;
+    }
+
+    input {
+        width: 310px;
+        height: 72px;
+    }
+
+    .container {
+        margin-left: 1%;
+    }
+
+    .link-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    p, a {
+        font-size: 14px;
     }
 }
