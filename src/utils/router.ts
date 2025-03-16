@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const routes = [
     {
         name: "Main",
-        path: "/",
+        path: baseUrl,
         component: () => import('../pages/MainPage.vue'),
     },
     {
         name: "PersonalAccount",
-        path: "/personal",
+        path: `${baseUrl}/personal`,
         component: () => import('../pages/PersonalAccount.vue'),
     }
 ]
