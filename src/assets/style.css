@@ -24,6 +24,7 @@
 .header {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .login-btn {
@@ -43,6 +44,8 @@
 .main-content {
     display: flex;
     align-items: center;
+    margin-top: 3%;
+    width: 100%;
 }
 
 h1 {
@@ -304,4 +307,64 @@ h4 {
 
 .toggle-pass-conf {
     top: 73%;
+}
+
+@media (max-width: 1366px) {
+    :root {
+        margin-left: 100px;
+    }
+
+    .header {
+        margin-right: 10%;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        margin-left: 50px;
+    }
+
+    .header {
+        width: 115%;
+    }
+
+    .main-content {
+        flex-direction: column;
+        text-align: center;
+        margin-left: 5%;
+    }
+
+    .main-image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        margin-left: 8px;
+    }
+
+    .logo {
+        width: 154px;
+    }
+
+    .header {
+        width: 155%;
+    }
+
+    .main-content {
+        margin-left: 50px;
+    }
+
+    h1 {
+        font-size: 61px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+
+    .main-image {
+        width: 130%;
+    }
 }
