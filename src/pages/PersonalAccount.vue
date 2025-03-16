@@ -1,6 +1,6 @@
 <template>
   <div class="notes-container">
-    <div
+    <article
         v-for="note in notes"
         :key="note.id"
         class="note">
@@ -13,7 +13,7 @@
         <img src="../assets/images/close.svg" alt="delete" />
         <p>Удалить</p>
       </div>
-    </div>
+    </article>
   </div>
   <note-form
       v-show="isOpenForm"
