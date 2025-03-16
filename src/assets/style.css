@@ -469,8 +469,12 @@ h4 {
         justify-content: center;
     }
 
-    p, a {
+    p, a, span {
         font-size: 14px;
+    }
+
+    span {
+        line-height: 40px;
     }
 
     .toggle-pass-reg {
