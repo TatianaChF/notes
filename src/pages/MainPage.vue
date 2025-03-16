@@ -1,10 +1,10 @@
 <template>
   <main>
     <div class="main-content">
-      <div>
+      <section>
         <h1>Мои заметки</h1>
         <h3>Не забывай о важном, храни его в облаке.</h3>
-      </div>
+      </section>
       <img
           src="../assets/images/main_image.svg"
           alt="main image"

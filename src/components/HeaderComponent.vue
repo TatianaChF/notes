@@ -1,6 +1,9 @@
 <template>
   <header class="header">
-    <img src="../assets/images/logo.svg" alt="logo" />
+    <img
+        src="../assets/images/logo.svg"
+        alt="logo"
+        class="logo"/>
     <div v-if="email != undefined">
       <div
           class="user-container">

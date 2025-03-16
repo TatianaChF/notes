@@ -1,11 +1,11 @@
 <template>
-  <div class="container-reg">
+  <div class="container-note">
     <button
         class="btn-close-note"
         @click="closeForm">
       <img src="../assets/images/close.svg" alt="close" />
     </button>
-    <div class="container">
+    <div class="form-note">
       <h2>Добавление заметки</h2>
       <div class="input-container">
         <div class="input-field">
