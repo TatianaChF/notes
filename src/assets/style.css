@@ -65,7 +65,8 @@ h3 {
     width: 60%;
 }
 
-.container-reg {
+.container-reg,
+.container-auth {
     position: absolute;
     top: 10%;
     left: 20%;
@@ -340,15 +341,21 @@ h4 {
         width: 100%;
     }
 
-    .container-reg {
-        left: 0;
+    .container-auth {
+        left: -53px;
         width: 688px;
         height: 560px;
     }
 
+    .container-reg {
+        left: -53px;
+        width: 688px;
+        height: 692px;
+    }
+
     .btn-close {
         margin-right: -600px;
-        margin-top: -80px;
+        margin-top: -20px;
     }
 
     .btn-close-reg {
@@ -358,6 +365,16 @@ h4 {
 
     .toggle-pass {
         top: 72%;
+        left: 90%;
+    }
+
+    .toggle-pass-reg {
+        top: 59%;
+        left: 90%;
+    }
+
+    .toggle-pass-conf {
+        top: 77%;
         left: 90%;
     }
 }
@@ -391,15 +408,20 @@ h4 {
         width: 130%;
     }
 
+    .container-auth,
     .container-reg {
         left: -14px;
         width: 352px;
         height: 632px;
     }
 
+    .container-reg {
+        height: 650px;
+    }
+
     .btn-close {
-        margin-right: -600px;
-        margin-top: -80px;
+        margin-right: -270px;
+        margin-top: 10px;
     }
 
     .btn-close-reg {
@@ -433,5 +455,15 @@ h4 {
 
     p, a {
         font-size: 14px;
+    }
+
+    .toggle-pass-reg {
+        top: 56%;
+        left: 90%;
+    }
+
+    .toggle-pass-conf {
+        top: 75%;
+        left: 90%;
     }
 }
